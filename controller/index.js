@@ -2,7 +2,8 @@ var express = require("express");
 var router = express.Router();
 var os = require("os");
 
-var VERSION = "1.0";
+var properties = require("../properties") 
+var VERSION = properties.VERSION;
 
 router.get("/", function(req, res) {
     var response = "<h1>Kubernetes Deployments Project</h1>" +
