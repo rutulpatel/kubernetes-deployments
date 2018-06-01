@@ -1,0 +1,26 @@
+{
+  "name": "kubernetes-deployments",
+  "version": "1.0.0",
+  "description": "A kubernetes deployment project which covers blue-green, A/B and Canary deployments concepts.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rutulpatel/kubernetes-deployments.git"
+  },
+  "author": "rutulpatel.rtl@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rutulpatel/kubernetes-deployments/issues"
+  },
+  "homepage": "https://github.com/rutulpatel/kubernetes-deployments#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "http-server": "^0.11.1",
+    "os": "^0.1.1",
+    "path": "^0.12.7"
+  }
+}
