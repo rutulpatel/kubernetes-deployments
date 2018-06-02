@@ -18,14 +18,14 @@ pipeline {
                 echo "props"
                 echo $props
                 echo "version"
-                echo $VERSION
+                // echo $VERSION
                 
             }
         }
     }
 
     environment {
-        def props = readProperties file:'./application.properties'
-        def VERSION = props['VERSION']
+        def props = readProperties file: './application.properties'
+        // def VERSION = props['VERSION']
     }
 }
