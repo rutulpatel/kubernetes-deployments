@@ -27,8 +27,8 @@ pipeline {
         }
     }
 
-    environment {
+    // environment {
         
-        // def VERSION = props['VERSION']
-    }
+    //     // def VERSION = props['VERSION']
+    // }
 }
