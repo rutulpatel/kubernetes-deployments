@@ -1,1 +1,0 @@
-module.exports.VERSION = "v1.0";
