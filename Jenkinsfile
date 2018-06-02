@@ -15,6 +15,9 @@ pipeline {
             }
             steps {
                 //sh 'docker build -t '
+                echo "props"
+                echo $props
+                echo "version"
                 echo $VERSION
                 
             }
@@ -22,7 +25,7 @@ pipeline {
     }
 
     environment {
-        def props = readProperties file: './application.properties'
+        def props = readProperties file:'./application.properties'
         def VERSION = props['VERSION']
     }
 }
