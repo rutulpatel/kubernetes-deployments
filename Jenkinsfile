@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage ('Get version') {
             agent {
-                docker { image 'node:9.11.alpine'}
+                docker { image 'node:10-alpine'}
             }
             steps {
                 sh 'node --version'
