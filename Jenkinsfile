@@ -14,11 +14,12 @@ pipeline {
       }
       steps {
         script {
-            def config = readJSON file:'properties.JSON';
-            env['config'] = config;
+            def properties = readJSON file:'./properties.json';
+            echo properties.VERSION
+            env['properties'] = properties;
         }
-        echo env.config
-        echo env.config["VERSION"]
+        echo env.properties
+        echo env.properties["VERSION"]
       }
     }
 
@@ -27,9 +28,9 @@ pipeline {
         label 'docker'
       }
       steps {
-        sh "echo 'Building docker image for ' ${env.config.VERSION} ' version.'"
-        echo env.config
-        sh "docker build -t ${env.config.IMAGE_NAME}:${env.config.VERSION} -t ${env.config.IMAGE_NAME}:latest ."
+        sh "echo 'Building docker image for ' ${env.properties.VERSION} ' version.'"
+        echo env.properties
+        sh "docker build -t ${env.properties.IMAGE_NAME}:${env.properties.VERSION} -t ${env.properties.IMAGE_NAME}:latest ."
         echo "Successfully built docker images..."
       }
     }
@@ -41,8 +42,8 @@ pipeline {
       steps {
         echo "Pushing docker images to docker hub registry"
         sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
-        sh "docker push ${env.config.IMAGE_NAME}:${env.config.VERSION}"
-        sh "docker push ${env.config.IMAGE_NAME}:latest"
+        sh "docker push ${env.properties.IMAGE_NAME}:${env.properties.VERSION}"
+        sh "docker push ${env.properties.IMAGE_NAME}:latest"
         echo "Successfully pushed docker images..."
       }
     }
@@ -52,8 +53,8 @@ pipeline {
         label 'docker'
       }
       steps {
-        sh "echo 'Deploying version:' ${env.config.VERSION}"
-        echo env.config
+        sh "echo 'Deploying version:' ${env.properties.VERSION}"
+        echo env.properties
       }
     }
   }
