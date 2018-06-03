@@ -17,13 +17,16 @@ pipeline {
             }
             steps {
                 //sh 'docker build -t '
-                sh "ls"
-                d = [test: 'Default', something: 'Default', other: 'Default']
-                props = readProperties defaults: ${d}, file: 'dir/my.properties', text: 'other=Override'
-                //props = readProperties file: './application.properties'
-                echo "props"
-                sh "echo ${props}"
-                echo "version"
+                script {
+                    sh "ls"
+                    d = [test: 'Default', something: 'Default', other: 'Default']
+                    props = readProperties defaults: ${d}, file: 'dir/my.properties', text: 'other=Override'
+                    //props = readProperties file: './application.properties'
+                    echo "props"
+                    sh "echo ${props}"
+                    echo "version"
+                    
+                }
                 // echo $VERSION
                 
             }
