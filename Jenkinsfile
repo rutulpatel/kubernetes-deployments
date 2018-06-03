@@ -9,10 +9,12 @@ pipeline {
       }
       steps {
         script {
-            def props = readProperties file:'application.properties';
-            env['VERSION'] = props['VERSION'];
+            def config = readProperties file:'application.properties';
+            env['config'] = config;
+            env['VERSION'] = config['VERSION'];
         }
         echo env.VERSION
+        echo env.config
       }
     }
     stage('Build') {
@@ -21,6 +23,8 @@ pipeline {
       }
       steps {
         sh "echo 'Building version:' ${env.VERSION}"
+        echo env.config
+        // sh "docker build -t "
       }
     }
     stage('Deploy') {
