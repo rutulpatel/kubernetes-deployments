@@ -18,11 +18,11 @@ pipeline {
             steps {
                 //sh 'docker build -t '
                 sh "ls"
-                def d = [test: 'Default', something: 'Default', other: 'Default']
-                def props = readProperties defaults: d, file: 'dir/my.properties', text: 'other=Override'
+                d = [test: 'Default', something: 'Default', other: 'Default']
+                props = readProperties defaults: ${d}, file: 'dir/my.properties', text: 'other=Override'
                 //props = readProperties file: './application.properties'
                 echo "props"
-                echo $props
+                echo ${props}
                 echo "version"
                 // echo $VERSION
                 
