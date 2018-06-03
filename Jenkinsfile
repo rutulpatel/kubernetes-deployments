@@ -20,8 +20,8 @@ pipeline {
       }
       steps {
         script {
-            def props = readProperties file:'application.properties';
-            env['VERSION'] = props['VERSION'];
+            props=readProperties file:'application.properties';
+            env['VERSION']=props['VERSION'];
         }
         // props = readProperties(file: 'application.properties')
         echo env.VERSION
