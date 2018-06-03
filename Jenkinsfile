@@ -18,7 +18,6 @@ pipeline {
             env['properties'] = properties;
         }
         echo env.properties
-        echo env.properties.VERSION
       }
     }
 
