@@ -17,7 +17,8 @@ pipeline {
             }
             steps {
                 //sh 'docker build -t '
-                props = readProperties file: './application.properties'
+                sh "ls -tlr"
+                props = './application.properties'
                 echo "props"
                 echo $props
                 echo "version"
