@@ -18,6 +18,7 @@ pipeline {
             env['config'] = config;
         }
         echo env.config
+        echo env.config.VERSION
       }
     }
 
