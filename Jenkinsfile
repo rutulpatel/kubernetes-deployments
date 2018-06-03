@@ -19,8 +19,20 @@ pipeline {
         label 'docker'
       }
       steps {
-        props = readProperties(file: 'application.properties')
-        sh 'echo ${VERSION}'
+        script {
+            def props = readProperties file:'application.properties';
+            env['VERSION'] = props['VERSION'];
+        }
+        // props = readProperties(file: 'application.properties')
+        echo env.VERSION
+      }
+    }
+    stage('Deploy') {
+      agent {
+        label 'docker'
+      }
+      steps {
+        echo env.VERSION
       }
     }
   }
