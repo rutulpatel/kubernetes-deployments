@@ -18,10 +18,10 @@ pipeline {
             steps {
                 //sh 'docker build -t '
                 sh "ls -tlr"
-                props = './application.properties'
-                echo "props"
-                echo $props
-                echo "version"
+                //props = "./application.properties"
+                //echo "props"
+                //echo $props
+                //echo "version"
                 // echo $VERSION
                 
             }
