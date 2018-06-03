@@ -15,7 +15,7 @@ pipeline {
       steps {
         script {
             def config = readProperties file:'application.properties';
-            env['config'] = config;
+            env['config'] = readJSON text: config;
         }
         echo env.config
       }
