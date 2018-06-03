@@ -22,7 +22,7 @@ pipeline {
                 props = readProperties defaults: ${d}, file: 'dir/my.properties', text: 'other=Override'
                 //props = readProperties file: './application.properties'
                 echo "props"
-                echo ${props}
+                sh "echo ${props}"
                 echo "version"
                 // echo $VERSION
                 
