@@ -26,7 +26,7 @@ pipeline {
         label 'docker'
       }
       steps {
-        sh "echo 'Building docker image for ' ${env.properties.VERSION} ' version.'"
+        // sh "echo 'Building docker image for ' ${env.properties.VERSION} ' version.'"
         echo env.properties
         echo properties        
         echo properties.VERSION
