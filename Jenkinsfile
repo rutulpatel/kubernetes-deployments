@@ -19,7 +19,7 @@ pipeline {
         label 'docker'
       }
       steps {
-        readProperties(file: 'application.properties')
+        props = readProperties(file: 'application.properties')
         sh 'echo ${VERSION}'
       }
     }
