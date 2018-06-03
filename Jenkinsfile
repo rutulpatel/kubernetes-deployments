@@ -3,15 +3,16 @@ pipeline {
     label 'master'
   }
   stages {
-    stage('Get version') {
+    stage('Load configurations') {
       agent {
-        docker {
-          image 'node:10-alpine'
-        }
-
+        label 'master'
       }
       steps {
-        sh 'node --version'
+        script {
+            def props = readProperties file:'application.properties';
+            env['VERSION'] = props['VERSION'];
+        }
+        echo env.VERSION
       }
     }
     stage('Build') {
@@ -19,12 +20,7 @@ pipeline {
         label 'docker'
       }
       steps {
-        script {
-            def props = readProperties file:'application.properties';
-            env['VERSION'] = props['VERSION'];
-        }
-        // props = readProperties(file: 'application.properties')
-        echo env.VERSION
+        echo "Building version:" env.VERSION
       }
     }
     stage('Deploy') {
@@ -32,7 +28,7 @@ pipeline {
         label 'docker'
       }
       steps {
-        echo env.VERSION
+        echo "Deploying version:" env.VERSION
       }
     }
   }
