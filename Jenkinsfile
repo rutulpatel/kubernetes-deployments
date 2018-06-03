@@ -15,11 +15,10 @@ pipeline {
       steps {
         script {
             def properties = readJSON file:'./properties.json';
-            echo properties.VERSION
             env['properties'] = properties;
         }
         echo env.properties
-        echo env.properties["VERSION"]
+        echo env.properties.VERSION
       }
     }
 
