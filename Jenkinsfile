@@ -20,7 +20,7 @@ pipeline {
         label 'docker'
       }
       steps {
-        echo "Building version:" env.VERSION
+        sh 'echo "Building version:" env.VERSION'
       }
     }
     stage('Deploy') {
@@ -28,7 +28,7 @@ pipeline {
         label 'docker'
       }
       steps {
-        echo "Deploying version:" env.VERSION
+        sh 'echo "Deploying version:" env.VERSION'
       }
     }
   }
