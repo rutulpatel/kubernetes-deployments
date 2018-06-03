@@ -15,9 +15,8 @@ pipeline {
       steps {
         script {
             def properties = readJSON file:'./properties.json';
-            env['properties'] = properties;
+            env['PROPERTIES'] = properties;
         }
-        echo env.properties
       }
     }
 
@@ -26,11 +25,11 @@ pipeline {
         label 'docker'
       }
       steps {
-        // sh "echo 'Building docker image for ' ${env.properties.VERSION} ' version.'"
-        echo env.properties
-        echo properties        
-        echo properties.VERSION
-        sh "docker build -t ${env.properties.IMAGE_NAME}:${env.properties.VERSION} -t ${env.properties.IMAGE_NAME}:latest ."
+        // converting env string variable to json
+        properties = readJSON text: env.properties
+        sh "echo 'Building docker image for ' ${properties.VERSION} ' version.'"
+        echo properties
+        sh "docker build -t ${properties.IMAGE_NAME}:${properties.VERSION} -t ${properties.IMAGE_NAME}:latest ."
         echo "Successfully built docker images..."
       }
     }
