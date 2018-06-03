@@ -5,6 +5,7 @@ pipeline {
 
   environment {
     DOCKER_CREDS = credentials("docker-hub-credentials");
+    PROPERTIES = {};
   }
 
   stages {
@@ -15,10 +16,13 @@ pipeline {
       steps {
         script {
             def properties = readJSON file:'./properties.json';
+            PROPERTIES = properties;
             env['properties'] = properties;
         }
         echo env.properties
-        echo env.properties.VERSION
+        echo PROPERTIES
+        echo PROPERTIES.VERSION
+        // echo env.properties.VERSION
       }
     }
 
@@ -27,6 +31,8 @@ pipeline {
         label 'docker'
       }
       steps {
+        echo PROPERTIES
+        echo PROPERTIES.VERSION
         sh "echo 'Building docker image for ' ${env.properties.VERSION} ' version.'"
         echo env.properties
         sh "docker build -t ${env.properties.IMAGE_NAME}:${env.properties.VERSION} -t ${env.properties.IMAGE_NAME}:latest ."
