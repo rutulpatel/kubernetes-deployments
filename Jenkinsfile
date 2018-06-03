@@ -20,6 +20,7 @@ pipeline {
       }
       steps {
         readProperties(file: 'application.properties')
+        sh 'echo ${VERSION}'
       }
     }
   }
