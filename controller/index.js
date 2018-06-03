@@ -2,11 +2,9 @@ var express = require("express");
 var router = express.Router();
 var os = require("os");
 
-var PropertiesReader = require("properties-reader");
-var properties = PropertiesReader("./application.properties");
-
-var VERSION = properties.get('VERSION');
-console.log(VERSION);
+// var PropertiesReader = require("properties-reader");
+var properties = require("../properties.json");
+var VERSION = properties.VERSION;
 
 router.get("/", function(req, res) {
     var response = "<h1>Kubernetes Deployments Project</h1>" +
