@@ -2,6 +2,11 @@ pipeline {
   agent {
     label 'master'
   }
+
+  environment {
+    DOCKER_CREDS = credentials("docker-hub-credentials");
+  }
+
   stages {
     stage('Load configurations') {
       agent {
@@ -11,28 +16,43 @@ pipeline {
         script {
             def config = readProperties file:'application.properties';
             env['config'] = config;
-            env['VERSION'] = config['VERSION'];
         }
-        echo env.VERSION
         echo env.config
       }
     }
-    stage('Build') {
+
+    stage('Build image') {
       agent {
         label 'docker'
       }
       steps {
-        sh "echo 'Building version:' ${env.VERSION}"
+        sh "echo 'Building docker image for ' ${env.config.VERSION} ' version.'"
         echo env.config
-        // sh "docker build -t "
+        sh "docker build -t ${env.config.IMAGE_NAME}:${env.config.VERSION} -t ${env.config.IMAGE_NAME}:latest ."
+        echo "Successfully built docker images..."
       }
     }
-    stage('Deploy') {
+
+    stage('Push image') {
       agent {
         label 'docker'
       }
       steps {
-        sh "echo 'Deploying version:' ${env.VERSION}"
+        echo "Pushing docker images to docker hub registry"
+        sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
+        sh "docker push ${env.config.IMAGE_NAME}:${env.config.VERSION}"
+        sh "docker push ${env.config.IMAGE_NAME}:latest"
+        echo "Successfully pushed docker images..."
+      }
+    }
+
+    stage('Deploy app') {
+      agent {
+        label 'docker'
+      }
+      steps {
+        sh "echo 'Deploying version:' ${env.config.VERSION}"
+        echo env.config
       }
     }
   }
