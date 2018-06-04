@@ -51,8 +51,10 @@ pipeline {
         label 'kubernetes'
       }
       steps {
-        sh "echo 'Deploying version:' ${env.VERSION}"
         parallel (
+        "Deployment version" {
+          sh "echo 'Deploying version:' ${env.VERSION}"
+        }
         "Get Nodes" {
           echo "get nodes"
           sh "kubectl get nodes"
