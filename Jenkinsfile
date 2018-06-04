@@ -75,7 +75,7 @@ pipeline {
           echo 'Cleaning up working dir'
           deleteDir()
           echo 'Deleting docker images other than latest'
-          sh 'docker rmi `docker images rutul/hello-kubernetes | grep -v latest | awk \'FNR != 1 { print \$3 }\'` || true'
+          sh "docker rmi `docker images ${env.IMAGE_NAME} | grep -v latest | awk \'FNR != 1 { print \$3 }\'` || true"
       }
     }
   }
