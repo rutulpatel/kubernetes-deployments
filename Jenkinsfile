@@ -54,7 +54,7 @@ pipeline {
         parallel (
         "Deployment version" {
           sh "echo 'Deploying version:' ${env.VERSION}"
-        }
+        },
         "Get Nodes" {
           echo "get nodes"
           sh "kubectl get nodes"
