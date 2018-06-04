@@ -48,11 +48,14 @@ pipeline {
 
     stage('Deploy app') {
       agent {
-        label 'docker'
+        label 'kubernetes'
       }
       steps {
         sh "echo 'Deploying version:' ${env.VERSION}"
-        echo env.PROPERTIES
+        echo "get nodes"
+        sh "kubectl get nodes"
+        echo "get pods"
+        sh "kubectl get pods"
       }
     }
   }
