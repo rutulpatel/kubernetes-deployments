@@ -52,8 +52,12 @@ pipeline {
       }
       steps {
         sh "echo 'Deploying version:' ${env.VERSION}"
+      }
+      steps {
         echo "get nodes"
         sh "kubectl get nodes"
+      }
+      steps {
         echo "get pods"
         sh "kubectl get pods"
       }
