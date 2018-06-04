@@ -52,14 +52,14 @@ pipeline {
       }
       steps {
         parallel (
-        "Deployment version" {
+        "Deployment version" : {
           sh "echo 'Deploying version:' ${env.VERSION}"
         },
-        "Get Nodes" {
+        "Get Nodes" : {
           echo "get nodes"
           sh "kubectl get nodes"
         },
-        "Get pods" {
+        "Get pods" : {
           echo "get pods"
           sh "kubectl get pods"
         }
