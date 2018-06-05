@@ -14,7 +14,7 @@ spec:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-    tempate: 
+    template: 
       metadata:
         labels:
           app: kubernetes-deployments
