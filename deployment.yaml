@@ -2,11 +2,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{APP_NAME}}
+  name: kubernetes-deployments
 spec:
   selector:
     matchLabels:
-      app: {{APP_NAME}}
+      app: kubernetes-deployments
   replicas: 2
   minReadySeconds: 10
   strategy:
@@ -17,10 +17,11 @@ spec:
     tempate: 
       metadata:
         labels:
-          app: {{APP_NAME}}
+          app: kubernetes-deployments
       spec:
         containers:
-          - name: {{APP_NAME}}
-            image: {{IMAGE_URL}}
+          - name: kubernetes-deployments
+            image: rutul/kubernetes-deployments:v1.0
             ports:
             - containerPort: 8080
+            

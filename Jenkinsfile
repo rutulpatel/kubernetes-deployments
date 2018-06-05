@@ -74,7 +74,7 @@ pipeline {
       }
       steps{
         echo 'Running kubectl apply command'
-        sh "kubectl apply -f deployment.yaml --IMAGE_URL=${env.IMAGE_NAME}:${env.VERSION} --APP_NAME=${env.APP_NAME}"
+        sh "kubectl apply -f deployment.yaml"
         // check pods status
         echo "get pods"
         sh "kubectl get pods"
