@@ -1,0 +1,26 @@
+#Kubernetes app deployment yaml file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-deployments
+spec:
+  selector:
+    matchLabels:
+      app: kubernetes-deployments
+  replicas: 2
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    tempate: 
+      metadata:
+        labels:
+          app: kubernetes-deployments
+      spec:
+        containers:
+          - name: kubernetes-deployments
+            image: rutul/kubernetes-deployments:v1.0
+            ports:
+            - containerPort: 8080
