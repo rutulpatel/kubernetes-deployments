@@ -1,4 +1,5 @@
 {
     "VERSION" : "v1.0",
+    "APP_NAME": "kubernetes-deployments",
     "IMAGE_NAME" : "rutul/kubernetes-deployments"
 }

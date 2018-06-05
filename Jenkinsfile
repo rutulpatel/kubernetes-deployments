@@ -18,6 +18,7 @@ pipeline {
             env['PROPERTIES'] = properties;
             env['VERSION'] = properties.VERSION;
             env['IMAGE_NAME'] = properties.IMAGE_NAME;
+            env['APP_NAME'] = properties.APP_NAME;
         }
       }
     }
@@ -46,7 +47,7 @@ pipeline {
       }
     }
 
-    stage('Deploy app') {
+    stage('Pre-Deployment stats') {
       agent {
         label 'kubernetes'
       }
@@ -64,6 +65,19 @@ pipeline {
             sh "kubectl get pods"
           }
         )
+      }
+    }
+
+    stage('Run Deploy') {
+      agent {
+        label 'kubernetes'
+      }
+      steps{
+        echo 'Running kubectl apply command'
+        sh "kubectl apply -f deployment.yaml --IMAGE_URL=${env.IMAGE_NAME}:${env.VERSION} --APP_NAME=${env.APP_NAME}"
+        // check pods status
+        echo "get pods"
+        sh "kubectl get pods"
       }
     }
 
